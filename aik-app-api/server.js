@@ -2,11 +2,7 @@
 var express = require('express');
 var app = express();
 var mysql = require("mysql");
-//const connection = mysql.createConnection({
-//  host     : process.env.DB_HOST || '192.168.130.194:3000',
-//  user     : process.env.DB_USER || 'root',
-//  password : process.env.DB_PASS || 'password',
-//  database : process.env.DB_NAME || 'dbAIK'
+
 const con = mysql.createConnection({
   host: '192.168.130.194',
   user: 'root',
@@ -33,32 +29,17 @@ app.get('/', function(req, res){
   res.json(response);
 })
 
-// Implement the movies API endpoint
+// Implement the vehicles API endpoint
 app.get('/buycars', function(req, res){
- con.query('SELECT * FROM vehicles', (err,rows) => {
-    if(err) throw err;
-    console.log('Data received from Db:');
-    console.log(rows);
-  });
-/*con.query('SELECT JSON_ARRAYAGG(JSON_OBJECT('title', title)) FROM vehicles;', (err,rows) => {
-    if(err) throw err;
-    console.log('Data received from Db:');
-    console.log(rows);
-  });
-*/
-  var vehicles = [
-    {title : 'Xerato', release: '2020', score: 8, price: '80.000.000', description : 'Modern Car 1.6CC'},    
-    {title : 'Pikanto', release : '2020', score: 6, price: '40.000.000', description : 'Modern Car 1.0CC'},
-    {title : 'Rio Zedan', release: '2016', score: 9, price: '30.000.000', description : 'Modern Car 2.0CC'},
-    {title : 'Zoluto', release: '2016', score: 9, price: '20.000.000', description : 'Modern Car 3.0CC'},
-    {title : 'Stringer', release : '2015', score: 7, price: '10.000.000', description: 'Modern Car 3.0CC'},
-    {title : 'Ant-Man', release: '2015', score: 8, price: '70.000.000', description : 'Modern Car 1.0CC'},
-    {title : 'Rio Jatchbash', release : '2014', score: 10, price: '50.000.000', description : 'Modern Car 1.0CC'},
-  ]
-  
- res.json(vehicles);
-})
-
+  con.query('SELECT * FROM vehicles', (err,vehicles) => {
+     if(err) throw err;
+     console.log('Data received from Db:');
+     console.log(vehicles);
+     res.json(vehicles);
+   });
+ 
+ })
+ 
 //app.get('/', function(req, res, next) {   
     //now you can call the get-driver, passing a callback function
 //    getMovies(function (err, moviesResult){ 

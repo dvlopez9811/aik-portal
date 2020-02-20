@@ -1,12 +1,20 @@
 // Get our dependencies
 var express = require('express');
 var app = express();
-//var mysql = require("mysql");
-//var connection = mysql.createConnection({
-//  host     : process.env.DB_HOST || 'mysql-test.cxrpknmq0hfi.us-west-2.rds.amazonaws.com',
-//  user     : process.env.DB_USER || 'applicationuser',
-//  password : process.env.DB_PASS || 'applicationuser',
-//  database : process.env.DB_NAME || 'movie_db'
+var mysql = require("mysql");
+//const connection = mysql.createConnection({
+//  host     : process.env.DB_HOST || '192.168.130.194:3000',
+//  user     : process.env.DB_USER || 'root',
+//  password : process.env.DB_PASS || 'password',
+//  database : process.env.DB_NAME || 'dbAIK'
+const con = mysql.createConnection({
+  host: '192.168.130.194',
+  user: 'root',
+  password: 'password',
+  database: 'dbAIK',
+  port: '3306'
+});
+
 //});
 
 //connection.connect();
@@ -27,6 +35,17 @@ app.get('/', function(req, res){
 
 // Implement the movies API endpoint
 app.get('/buycars', function(req, res){
+ con.query('SELECT * FROM vehicles', (err,rows) => {
+    if(err) throw err;
+    console.log('Data received from Db:');
+    console.log(rows);
+  });
+/*con.query('SELECT JSON_ARRAYAGG(JSON_OBJECT('title', title)) FROM vehicles;', (err,rows) => {
+    if(err) throw err;
+    console.log('Data received from Db:');
+    console.log(rows);
+  });
+*/
   var vehicles = [
     {title : 'Xerato', release: '2020', score: 8, price: '80.000.000', description : 'Modern Car 1.6CC'},    
     {title : 'Pikanto', release : '2020', score: 6, price: '40.000.000', description : 'Modern Car 1.0CC'},
@@ -36,8 +55,8 @@ app.get('/buycars', function(req, res){
     {title : 'Ant-Man', release: '2015', score: 8, price: '70.000.000', description : 'Modern Car 1.0CC'},
     {title : 'Rio Jatchbash', release : '2014', score: 10, price: '50.000.000', description : 'Modern Car 1.0CC'},
   ]
-
-  res.json(vehicles);
+  
+ res.json(vehicles);
 })
 
 //app.get('/', function(req, res, next) {   

@@ -51,6 +51,13 @@ app.get('/buycars', function(req, res){
 
 // Implement the reviewers API endpoint
 app.get('/vehicles', function(req, res){
+  con.query('SELECT * FROM vehicles', (err,vehicles) => {
+    if(err) throw err;
+    console.log('Data received from Db:');
+    console.log(vehicles);
+    res.json(vehicles);
+  });
+  /*
   var vehicles = [
     {name : 'Xerato', description : 'Modern Car 1.6CC', avatar: 'https://www.kia.com/content/dam/kwcms/co/es/images/shoppingtool/Cerato-Showroom.png'},
     {name: 'Pikanto', description : 'Modern Car 1.6CC', avatar: 'https://www.kia.com/content/dam/kwcms/co/es/images/showroom/PicantoNew/kia-co-picanto-ja.png'},
@@ -62,10 +69,18 @@ app.get('/vehicles', function(req, res){
   ];
 
   res.json(vehicles);
+*/
 })
 
 // Implement the publications API endpoint
 app.get('/support', function(req, res){
+  con.query('SELECT * FROM support', (err,support) => {
+    if(err) throw err;
+    console.log('Data received from Db:');
+    console.log(support);
+    res.json(support);
+  });
+  /*
   var support = [
     {name : 'Mechanics Appointments', avatar: 'glyphicon-eye-open'},
     {name : 'Post-sale service', avatar: 'glyphicon-fire'},
@@ -76,6 +91,7 @@ app.get('/support', function(req, res){
   ];
 
   res.json(support);
+*/
 })
 
 // Implement the pending reviews API endpoint

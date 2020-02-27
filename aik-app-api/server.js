@@ -131,7 +131,7 @@ app.get('/experience', function(req, res){
   var pub = []
   getPublicidad(pub)
   var inn = []
-  getinnovacion(inn)
+  getInnovacion(inn)
   var redsoc = [
     {nombre : 'Facebook', imagen: 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Facebook_Logo_%282019%29.png/240px-Facebook_Logo_%282019%29.png', enlace: 'https://www.facebook.com/'},
     {nombre: 'Instagram', imagen: 'https://www.instagram.com/static/images/ico/xxhdpi_launcher.png/99cf3909d459.png', enlace: 'https://www.instagram.com/'},

@@ -17,21 +17,49 @@
     <h2>Our Support</h2>
   </div>
 
+<h1>PUBLICACIONES</h1>
+  <% pending[0].forEach(function(publication, index) { %>
   <div class="row">
-  <% experience.forEach(function(experience, index) { %>
+  
     <div class="col-sm-4">
       <div class="panel">
         <div class="panel-heading">
-          <h3 class="panel-title"><%= experience.name %></h3>
+          <h3 class="panel-title"><%= publication.nombre %></h3>
         </div>
         <div class="panel-body text-center">
-          <h1><span class="glyphicon <%= experience.avatar %>"></span></h1>
+          <a href="<%= publication.enlace %>">
+            <img src="<%= publication.imagen %>">
+          </a>
         </div>
       </div>
     </div>
-  <% }) %>
   </div>
-</div>
+  <% }) %>
 
-  </body> 
+<h1>REDES SOCIALES</h1>
+
+  <% pending[1].forEach(function(redsocial, index) { %>
+    <div class="row">
+      <div class="col-sm-12">
+        <a href="<%= redsocial.enlace %>">
+          <label><%= redsocial.nombre %></label>
+          <img src="<%= redsocial.imagen %>">
+        </a>
+      </div>
+    </div>
+    <% }) %>
+
+<h1>INNOVACION</h1>
+  <% pending[2].forEach(function(innovacion, index) { %>
+    <div class="row">
+      <div class="col-sm-12">
+        <h1><%= innovacion.nombre %></h1>
+        <label> <%= innovacion.descripcion %> </label>
+        <img src="<%= innovacion.imagen %>">
+      </div>
+    </div>
+    <% }) %>
+  </div>
+
+</body>
 </html>

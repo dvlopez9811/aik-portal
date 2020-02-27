@@ -8,7 +8,6 @@ const con = mysql.createConnection({
   //host: '192.168.130.194',
   //host: '172.30.183.221',
   host: 'localhost',
-  host: '192.168.130.194',
   user: 'root',
   password: 'password',
   database: 'dbAIK',
@@ -101,23 +100,23 @@ app.get('/support', function(req, res){
 // Implement the pending reviews API endpoint
 
 // Implement Experiencia AIK
-app.get('/publicidad', function(req,res){
+function getPublicidad(pub){
   con.query('SELECT * FROM publicidad', (err,publicidad) => {
     if(err) throw err;
     console.log('Data received from Db:');
     console.log(publicidad);
-    res.json(publicidad);
+    pub = publicidad;
   });
-})
-
-app.get('/innovacion', function(req,res){
+}
+  
+function getInnovacion(inn){
   con.query('SELECT * FROM innovacion', (err,innovacion) => {
     if(err) throw err;
     console.log('Data received from Db:');
     console.log(innovacion);
-    res.json(innovacion);
+    inn = innovacion;
   });
-})
+}
 
 app.get('/redsocial', function(req, res){
   var redsocial = [
@@ -126,6 +125,20 @@ app.get('/redsocial', function(req, res){
     {nombre: 'Twitter', imagen: 'https://cdn.icon-icons.com/icons2/1907/PNG/512/iconfinder-twitter-4555883_121368.png', enlace: 'https://www.twitter.com/'}
   ]
   res.json(redsocial);
+})
+
+app.get('/experience', function(req, res){
+  var pub = []
+  getPublicidad(pub)
+  var inn = []
+  getinnovacion(inn)
+  var redsoc = [
+    {nombre : 'Facebook', imagen: 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Facebook_Logo_%282019%29.png/240px-Facebook_Logo_%282019%29.png', enlace: 'https://www.facebook.com/'},
+    {nombre: 'Instagram', imagen: 'https://www.instagram.com/static/images/ico/xxhdpi_launcher.png/99cf3909d459.png', enlace: 'https://www.instagram.com/'},
+    {nombre: 'Twitter', imagen: 'https://cdn.icon-icons.com/icons2/1907/PNG/512/iconfinder-twitter-4555883_121368.png', enlace: 'https://www.twitter.com/'}
+  ]
+  var experience = [pub,inn,redsoc]
+  res.json(experience);
 })
 console.log("server listening through port: "+process.env.PORT);
 // Launch our API Server and have it listen on port 3000.

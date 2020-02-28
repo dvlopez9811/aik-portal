@@ -66,17 +66,53 @@ app.get('/support', function(req, res){
 })
 
 // We’ve added the pending route, but calling this route from the MovieAnalyst Website will always result in a 403 Forbidden error as this client does not have the admin scope required to get the data.
-app.get('/pending', function(req, res){
+
+//Se obtiene la data del servidor backend y se genera un array de requests json que contiene las 3 necesarias para el modulo
+
+app.get('/experience', function(req, res){
+  var exp = [];
   request
-    .get('http://'+backendHost+':3000/pending')
+    .get('http://'+backendHost+':3000/publicidad')
     .end(function(err, data) {
       if(data.status == 403){
         res.send(403, '403 Forbidden');
       }else{
-        var experience = data.body;
-        res.render('experience', {experience : experience});
+        var publicidad = data.body;
+        exp[0] = publicidad;
+        if(!(typeof exp[1] == 'undefined') && !(typeof exp[2] == 'undefined')){
+          res.render('experience', {exp : exp});
+        }
       }
     })
+    request
+    .get('http://'+backendHost+':3000/innovacion')
+    .end(function(err, data) {
+      if(data.status == 403){
+        res.send(403, '403 Forbidden');
+      }else{
+        var innovacion = data.body;
+        exp[1] = innovacion;
+        if(!(typeof exp[0] == 'undefined') && !(typeof exp[2] == 'undefined')){
+          res.render('experience', {exp : exp});
+        }
+      }
+    })
+
+    request
+    .get('http://'+backendHost+':3000/redsocial')
+    .end(function(err, data) {
+      if(data.status == 403){
+        res.send(403, '403 Forbidden');
+      }else{
+        var redsocial = data.body;
+        exp[2] = redsocial;
+        console.log(exp);
+        if(!(typeof exp[1] == 'undefined') && !(typeof exp[0] == 'undefined')){
+          res.render('experience', {exp : exp});
+        }
+      }
+    })
+    
 })
 
 module.exports = app.listen(3030);

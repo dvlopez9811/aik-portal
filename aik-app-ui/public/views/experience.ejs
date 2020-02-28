@@ -14,52 +14,46 @@
 <div class="container">
   <div class="jumbotron text-center">
     <h1><span class="glyphicon glyphicon-tower"></span></h1>
-    <h2>Our Support</h2>
+    <h2>AIK Experience</h2>
   </div>
+<h1>Innovación</h1>
+  <% exp[1].forEach(function(exp, index) { %>
+    <div class="row">
+      <div class="col-sm-12">
+        <h2><%= exp.nombre %></h2>
+        <h4> <%= exp.descripcion %> </h4>
+        <img src="<%= exp.imagen %>" height="200" width="300">
+      </div>
+    </div>
+    <% }) %>
 
-<h1>PUBLICACIONES</h1>
-  <% pending[0].forEach(function(publication, index) { %>
+    <h1>Sponsors</h1>
+  <% exp[0].forEach(function(exp, index) { %>
   <div class="row">
-  
     <div class="col-sm-4">
       <div class="panel">
         <div class="panel-heading">
-          <h3 class="panel-title"><%= publication.nombre %></h3>
+          <h3 class="panel-title"><%= exp.nombre %></h3>
         </div>
         <div class="panel-body text-center">
-          <a href="<%= publication.enlace %>">
-            <img src="<%= publication.imagen %>">
+          <a href="<%= exp.enlace %>">
+            <img src="<%= exp.imagen %>" height="100" width="250">
           </a>
         </div>
       </div>
     </div>
   </div>
   <% }) %>
-
-<h1>REDES SOCIALES</h1>
-
-  <% pending[1].forEach(function(redsocial, index) { %>
-    <div class="row">
-      <div class="col-sm-12">
-        <a href="<%= redsocial.enlace %>">
-          <label><%= redsocial.nombre %></label>
-          <img src="<%= redsocial.imagen %>">
-        </a>
+  <h1>Social Media</h1>
+    <% exp[2].forEach(function(exp, index) { %>
+      <div class="row">
+        <div class="col-sm-12">
+          <a href="<%= exp.enlace %>">
+            <img src="<%= exp.imagen %>" height="100" width="100">
+          </a>
+        </div>
       </div>
-    </div>
-    <% }) %>
-
-<h1>INNOVACION</h1>
-  <% pending[2].forEach(function(innovacion, index) { %>
-    <div class="row">
-      <div class="col-sm-12">
-        <h1><%= innovacion.nombre %></h1>
-        <label> <%= innovacion.descripcion %> </label>
-        <img src="<%= innovacion.imagen %>">
-      </div>
-    </div>
-    <% }) %>
-  </div>
+  <% }) %>
 
 </body>
 </html>
